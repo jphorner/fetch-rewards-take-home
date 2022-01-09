@@ -118,17 +118,18 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
-'use strict';
+'use strict'; // Data variables
 
 var registrationData;
 var occupations;
-var stateOptions;
+var stateOptions; // Form selectors
+
 var fullNameField = document.getElementById('userFullName');
 var emailField = document.getElementById('userEmail');
 var passwordField = document.getElementById('userPassword');
 var formSubmit = document.getElementById('submitRegistration');
 var occupationList = document.getElementById('occupationList');
-var statesList = document.getElementById('statesList');
+var statesList = document.getElementById('statesList'); // Form population functions
 
 var populateOccupations = function populateOccupations() {
   for (var i = 0; i < occupations.length; i++) {
@@ -140,7 +141,8 @@ var populateStates = function populateStates() {
   for (var i = 0; i < stateOptions.length; i++) {
     statesList.options[i] = new Option("".concat(stateOptions[i].name));
   }
-};
+}; // Event Listeners
+
 
 window.addEventListener('load', function () {
   fetch('https://frontend-take-home.fetchrewards.com/form').then(function (response) {
@@ -209,7 +211,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52651" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58646" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,8 +1,12 @@
 'use strict';
 
+// Data variables
+
 let registrationData;
 let occupations;
 let stateOptions;
+
+// Form selectors
 const fullNameField = document.getElementById('userFullName');
 const emailField = document.getElementById('userEmail');
 const passwordField = document.getElementById('userPassword');
@@ -10,6 +14,7 @@ const formSubmit = document.getElementById('submitRegistration');
 let occupationList = document.getElementById('occupationList');
 let statesList = document.getElementById('statesList');
 
+// Form population functions
 
 const populateOccupations = () => {
   for (let i = 0; i < occupations.length; i++) {
@@ -22,6 +27,8 @@ const populateStates = () => {
     statesList.options[i] = new Option(`${stateOptions[i].name}`);
   }
 };
+
+// Event Listeners
 
 window.addEventListener('load', () => {
   fetch('https://frontend-take-home.fetchrewards.com/form')
