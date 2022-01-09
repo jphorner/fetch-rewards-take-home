@@ -127,7 +127,7 @@ progress {
   font: inherit;
 }
 
-[hidden] {
+.hidden {
   display: none;
 }
 
@@ -151,7 +151,7 @@ progress {
 .account-creation-form {
   display: flex;
   flex-direction: column;
-  height: 20rem;
+  height: 22rem;
   min-width: 30rem;
 }
 
@@ -195,6 +195,25 @@ progress {
   margin-top: 1rem;
   color: white;
   background-color: #1835a0;
+  transition-duration: .25s;
+}
+
+.submit-registration:hover {
+  background-color: #FFA300;
+}
+
+.no-match {
+  font-size: .9rem;
+  text-align: right;
+  color: #ffd28e;
+  margin-top: .2rem;
+}
+
+.incomplete-form,
+.submission-error {
+  text-align: center;
+  color: #ffd28e;
+  padding-top: .4rem;
 }
 
 

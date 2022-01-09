@@ -7,7 +7,7 @@
 <script src="/style.e308ff8e.js"></script></head>
 <body>
   <h1 class="create-your-account">Create Your Account</h1>
-  <h3 class="account-creation-prompt">You're almost there! Just complete this form to get started.</h3>
+  <h3 class="account-creation-prompt">You're almost there! Just complete this form to build your profile.</h3>
   <div class="form-container">
     <section class="account-creation-form" id="creationForm">
       <section class="user-info box" id="userInfo">
@@ -17,6 +17,7 @@
           <input class="password box text-input" id="userPassword" type="password" placeholder="Password">
           <input class="confirm-password box text-input" id="confirmUserPassword" type="password" placeholder="Confirm password">
         </div>
+        <div class="no-match hidden" id="passwordErr">Your passwords don't match. Please try again.</div>
       </section>
       <section class="dropdown-selectors">
         <h4>Occupation:</h4>
@@ -27,6 +28,8 @@
         </select>
       </section>
       <input class="submit-registration box" id="submitRegistration" type="submit" value="Create Account">
+      <div class="incomplete-form hidden" id="incompleteForm">Please complete all fields to create your account.</div>
+      <div class="submission-error hidden" id="submissionErr">Oops! We ran into an error submitting your form.<br>Please reload the page and try again.</div>
     </section>
   </div>
   <script src="/main.1f19ae8e.js"></script>

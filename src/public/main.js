@@ -10,6 +10,7 @@ let stateOptions;
 const fullNameField = document.getElementById('userFullName');
 const emailField = document.getElementById('userEmail');
 const passwordField = document.getElementById('userPassword');
+const confirmPasswordField = document.getElementById('confirmUserPassword');
 const formSubmit = document.getElementById('submitRegistration');
 let occupationList = document.getElementById('occupationList');
 let statesList = document.getElementById('statesList');
@@ -28,6 +29,14 @@ const populateStates = () => {
   }
 };
 
+const comparePasswords = () => {
+  if (passwordField.value === confirmPasswordField.value) {
+    return true;
+  } else {
+    document.getElementById('passwordErr').classList.remove('hidden');
+  }
+}
+
 // Event Listeners
 
 window.addEventListener('load', () => {
@@ -42,26 +51,34 @@ window.addEventListener('load', () => {
 });
 
 formSubmit.addEventListener('click', () => {
-  if (fullNameField.value && emailField.value && passwordField.value) {
-    console.log('nice')
-    fetch('https://frontend-take-home.fetchrewards.com/form', {
-      method: 'POST',
-      body: JSON.stringify(
-        {
-          "name": fullNameField.value,
-          "email": emailField.value,
-          "password": passwordField.value,
-          "occupation": occupationList.value,
-          "state": statesList.value
+  if (fullNameField.value && emailField.value && passwordField.value && confirmPasswordField.value) {
+    if (comparePasswords()) {
+      console.log('match');
+      fetch('https://frontend-take-home.fetchrewards.com/form', {
+        method: 'POST',
+        body: JSON.stringify(
+          {
+            "name": fullNameField.value,
+            "email": emailField.value,
+            "password": passwordField.value,
+            "occupation": occupationList.value,
+            "state": statesList.value
+          }
+        ),
+        headers: {
+          'Content-Type': 'application/json'
         }
-      ),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then((response) => response.json())
-    .then((data) => data);
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+      })
+      .catch(error => {
+        document.getElementById('submissionErr').classList.remove('hidden');
+      })
+    }
+  } else {
+    document.getElementById('incompleteForm').classList.remove('hidden');
   }
 })
-
-// Privacy logic
