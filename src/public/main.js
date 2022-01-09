@@ -3,8 +3,13 @@
 let registrationData;
 let occupations;
 let stateOptions;
+const fullNameField = document.getElementById('userFullName');
+const emailField = document.getElementById('userEmail');
+const passwordField = document.getElementById('userPassword');
+const formSubmit = document.getElementById('submitRegistration');
 let occupationList = document.getElementById('occupationList');
 let statesList = document.getElementById('statesList');
+
 
 const populateOccupations = () => {
   for (let i = 0; i < occupations.length; i++) {
@@ -29,7 +34,25 @@ window.addEventListener('load', () => {
   .then(() => console.log(stateOptions))
 });
 
-
-//   .then(() => console.log('OPTIONS: ', registrationData))
-//   .then(() => console.log('OCCUPATIONS: ', occupations))
-//   .then(() => console.log('STATES: ', stateOptions))
+formSubmit.addEventListener('click', () => {
+  if (fullNameField.value && emailField.value && passwordField.value) {
+    console.log('nice')
+    fetch('https://frontend-take-home.fetchrewards.com/form', {
+      method: 'POST',
+      body: JSON.stringify(
+        {
+          "name": fullNameField.value,
+          "email": emailField.value,
+          "password": passwordField.value,
+          "occupation": occupationList.value,
+          "state": statesList.value
+        }
+      ),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => response.json())
+    .then((data) => data);
+  }
+})
