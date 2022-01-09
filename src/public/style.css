@@ -28,6 +28,12 @@ h1 {
   margin: 0.67em 0;
 }
 
+h4 {
+  margin-top: .2rem;
+  margin-bottom: .2rem;
+  color: white;
+}
+
 hr {
   box-sizing: content-box;
   height: 0;
@@ -125,6 +131,18 @@ progress {
   display: none;
 }
 
+.create-your-account {
+  font-size: 2.5rem;
+  text-align: center;
+  color: white;
+  margin-top: 15%;
+}
+
+.account-creation-prompt {
+  text-align: center;
+  color: white;
+}
+
 .form-container {
   display: flex;
   justify-content: center;
@@ -133,7 +151,8 @@ progress {
 .account-creation-form {
   display: flex;
   flex-direction: column;
-  height: 15rem;
+  height: 20rem;
+  min-width: 30rem;
 }
 
 .user-info {
@@ -143,11 +162,37 @@ progress {
 .dropdown-selectors {
   display: flex;
   flex-direction: column;
-  margin-top: .5rem;
+  margin-top: 3.4rem;
 }
 
 .box {
-  margin-top: .2rem;
-  margin-bottom: .2rem;
+  margin-top: .4rem;
+  margin-bottom: .4rem;
   height: 2rem;
+  border: 0px;
+  border-radius: .2rem;
+}
+
+.text-input {
+  padding-left: .5rem;
+  width: 14.5rem;
+}
+
+.full-name,
+.password {
+  width: 14rem;
+  margin-right: .5rem;
+}
+
+.occupations,
+.states {
+  padding-left: .5rem;
+}
+
+.submit-registration {
+  cursor: pointer;
+  height: 2.4rem;
+  margin-top: 1rem;
+  color: white;
+  background-color: #1835a0;
 }

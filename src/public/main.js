@@ -63,3 +63,5 @@ formSubmit.addEventListener('click', () => {
     .then((data) => data);
   }
 })
+
+// Privacy logic
