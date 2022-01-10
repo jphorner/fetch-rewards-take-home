@@ -28,6 +28,14 @@ h1 {
   margin: 0.67em 0;
 }
 
+h2 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
 h4 {
   margin-top: .2rem;
   margin-bottom: .2rem;
@@ -153,10 +161,12 @@ progress {
   flex-direction: column;
   height: 22rem;
   min-width: 30rem;
+  transition-duration: .4s;
+  opacity: 100%;
 }
 
-.user-info {
-
+.account-creation-text {
+  transition-duration: .4s;
 }
 
 .dropdown-selectors {
@@ -214,6 +224,14 @@ progress {
   text-align: center;
   color: #ffd28e;
   padding-top: .4rem;
+}
+
+.appear {
+  opacity: 100%;
+}
+
+.vanish {
+  opacity: 0%;
 }
 
 

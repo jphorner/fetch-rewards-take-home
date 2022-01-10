@@ -129,6 +129,9 @@ var emailField = document.getElementById('userEmail');
 var passwordField = document.getElementById('userPassword');
 var confirmPasswordField = document.getElementById('confirmUserPassword');
 var formSubmit = document.getElementById('submitRegistration');
+var accountCreationForm = document.getElementById('creationForm');
+var promptText = document.getElementById('accountCreationText');
+var submissionSuccessful = document.getElementById('submissionSuccessful');
 var occupationList = document.getElementById('occupationList');
 var statesList = document.getElementById('statesList'); // Form population functions
 
@@ -150,7 +153,16 @@ var comparePasswords = function comparePasswords() {
   } else {
     document.getElementById('passwordErr').classList.remove('hidden');
   }
-}; // Event Listeners
+}; // Submission confirmation
+
+
+var showConfirmation = function showConfirmation() {
+  setTimeout(function () {
+    accountCreationForm.classList.add('hidden');
+    promptText.classList.add('hidden');
+    submissionSuccessful.classList.remove('hidden');
+  }, 500);
+}; // Event Listeners & Fetches
 
 
 window.addEventListener('load', function () {
@@ -166,8 +178,6 @@ window.addEventListener('load', function () {
     return populateOccupations();
   }).then(function () {
     return populateStates();
-  }).then(function () {
-    return console.log(stateOptions);
   });
 });
 formSubmit.addEventListener('click', function () {
@@ -188,10 +198,16 @@ formSubmit.addEventListener('click', function () {
         }
       }).then(function (response) {
         if (response.ok) {
+          console.log('success');
+          accountCreationForm.classList.add('vanish');
+          promptText.classList.add('vanish');
+          showConfirmation();
           return response.json();
         }
-      }).catch(function (error) {
-        document.getElementById('submissionErr').classList.remove('hidden');
+      }).catch(function (response) {
+        if (!response.ok) {
+          document.getElementById('submissionErr').classList.remove('hidden');
+        }
       });
     }
   } else {
@@ -226,7 +242,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56176" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49839" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
