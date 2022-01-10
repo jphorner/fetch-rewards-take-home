@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <h1 class="create-your-account">Create Your Account</h1>
-  <h3 class="account-creation-prompt">You're almost there! Just complete this form to build your profile.</h3>
+  <div class="account-creation-text" id="accountCreationText">
+    <h1 class="create-your-account">Create Your Account</h1>
+    <h3 class="account-creation-prompt" id="creationPrompt">You're almost there! Just complete this form to build your profile.</h3>
+  </div>
   <div class="form-container">
     <section class="account-creation-form" id="creationForm">
       <section class="user-info box" id="userInfo">
@@ -21,17 +23,17 @@
       </section>
       <section class="dropdown-selectors">
         <h4>Occupation:</h4>
-        <select class="occupations box" id="occupationList">
-        </select>
+        <select class="occupations box" id="occupationList"></select>
         <h4>State of residence:</h4>
-        <select class="states box" id="statesList">
-        </select>
+        <select class="states box" id="statesList" value="Select a state"></select>
       </section>
       <input class="submit-registration box" id="submitRegistration" type="submit" value="Create Account"></input>
       <div class="incomplete-form hidden" id="incompleteForm">Please complete all fields to create your account.</div>
       <div class="submission-error hidden" id="submissionErr">Oops! We ran into an error submitting your form.<br>Please reload the page and try again.</div>
+      <div class="form-submitted hidden"></h1>
     </section>
   </div>
+  <h2 class="submission-successful hidden" id="submissionSuccessful">Your account has been created. Welcome!</h2>
   <script src="main.js"></script>
 </body>
 </html>

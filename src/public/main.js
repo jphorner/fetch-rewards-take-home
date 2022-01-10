@@ -12,6 +12,9 @@ const emailField = document.getElementById('userEmail');
 const passwordField = document.getElementById('userPassword');
 const confirmPasswordField = document.getElementById('confirmUserPassword');
 const formSubmit = document.getElementById('submitRegistration');
+const accountCreationForm = document.getElementById('creationForm');
+const promptText = document.getElementById('accountCreationText');
+const submissionSuccessful = document.getElementById('submissionSuccessful');
 let occupationList = document.getElementById('occupationList');
 let statesList = document.getElementById('statesList');
 
@@ -25,7 +28,7 @@ const populateOccupations = () => {
 
 const populateStates = () => {
   for (let i = 0; i < stateOptions.length; i++) {
-    statesList.options[i] = new Option(`${stateOptions[i].name}`);
+    statesList.options[i] = new Option(`${stateOptions[i + 1].name}`);
   }
 };
 
@@ -37,7 +40,17 @@ const comparePasswords = () => {
   }
 }
 
-// Event Listeners
+// Submission confirmation
+
+const showConfirmation = () => {
+  setTimeout(() => {
+    accountCreationForm.classList.add('hidden');
+    promptText.classList.add('hidden');
+    submissionSuccessful.classList.remove('hidden');
+  }, 500)
+}
+
+// Event Listeners/Fetches
 
 window.addEventListener('load', () => {
   fetch('https://frontend-take-home.fetchrewards.com/form')
@@ -47,13 +60,12 @@ window.addEventListener('load', () => {
   .then(data => stateOptions = registrationData.states)
   .then(() => populateOccupations())
   .then(() => populateStates())
-  .then(() => console.log(stateOptions))
 });
 
 formSubmit.addEventListener('click', () => {
+  let accountCreated;
   if (fullNameField.value && emailField.value && passwordField.value && confirmPasswordField.value) {
     if (comparePasswords()) {
-      console.log('match');
       fetch('https://frontend-take-home.fetchrewards.com/form', {
         method: 'POST',
         body: JSON.stringify(
@@ -71,11 +83,17 @@ formSubmit.addEventListener('click', () => {
       })
       .then(response => {
         if (response.ok) {
-          return response.json()
+          accountCreationForm.classList.add('vanish');
+          promptText.classList.add('vanish');
+          accountCreated = true;
+          showConfirmation();
+          return response.json();
         }
       })
       .catch(error => {
-        document.getElementById('submissionErr').classList.remove('hidden');
+        if (!accountCreated) {
+          document.getElementById('submissionErr').classList.remove('hidden');
+        }
       })
     }
   } else {
