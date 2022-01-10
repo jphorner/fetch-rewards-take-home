@@ -123,6 +123,10 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 var registrationData;
 var occupations;
 var stateOptions;
+var fullNameField = document.getElementById('userFullName');
+var emailField = document.getElementById('userEmail');
+var passwordField = document.getElementById('userPassword');
+var formSubmit = document.getElementById('submitRegistration');
 var occupationList = document.getElementById('occupationList');
 var statesList = document.getElementById('statesList');
 
@@ -154,9 +158,29 @@ window.addEventListener('load', function () {
   }).then(function () {
     return console.log(stateOptions);
   });
-}); //   .then(() => console.log('OPTIONS: ', registrationData))
-//   .then(() => console.log('OCCUPATIONS: ', occupations))
-//   .then(() => console.log('STATES: ', stateOptions))
+});
+formSubmit.addEventListener('click', function () {
+  if (fullNameField.value && emailField.value && passwordField.value) {
+    console.log('nice');
+    fetch('https://frontend-take-home.fetchrewards.com/form', {
+      method: 'POST',
+      body: JSON.stringify({
+        "name": fullNameField.value,
+        "email": emailField.value,
+        "password": passwordField.value,
+        "occupation": occupationList.value,
+        "state": statesList.value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      return data;
+    });
+  }
+});
 },{}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -185,7 +209,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50015" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52651" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
