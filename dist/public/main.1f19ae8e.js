@@ -118,17 +118,19 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
-'use strict';
+'use strict'; // Data variables
 
 var registrationData;
 var occupations;
-var stateOptions;
+var stateOptions; // Form selectors
+
 var fullNameField = document.getElementById('userFullName');
 var emailField = document.getElementById('userEmail');
 var passwordField = document.getElementById('userPassword');
+var confirmPasswordField = document.getElementById('confirmUserPassword');
 var formSubmit = document.getElementById('submitRegistration');
 var occupationList = document.getElementById('occupationList');
-var statesList = document.getElementById('statesList');
+var statesList = document.getElementById('statesList'); // Form population functions
 
 var populateOccupations = function populateOccupations() {
   for (var i = 0; i < occupations.length; i++) {
@@ -141,6 +143,15 @@ var populateStates = function populateStates() {
     statesList.options[i] = new Option("".concat(stateOptions[i].name));
   }
 };
+
+var comparePasswords = function comparePasswords() {
+  if (passwordField.value === confirmPasswordField.value) {
+    return true;
+  } else {
+    document.getElementById('passwordErr').classList.remove('hidden');
+  }
+}; // Event Listeners
+
 
 window.addEventListener('load', function () {
   fetch('https://frontend-take-home.fetchrewards.com/form').then(function (response) {
@@ -160,25 +171,31 @@ window.addEventListener('load', function () {
   });
 });
 formSubmit.addEventListener('click', function () {
-  if (fullNameField.value && emailField.value && passwordField.value) {
-    console.log('nice');
-    fetch('https://frontend-take-home.fetchrewards.com/form', {
-      method: 'POST',
-      body: JSON.stringify({
-        "name": fullNameField.value,
-        "email": emailField.value,
-        "password": passwordField.value,
-        "occupation": occupationList.value,
-        "state": statesList.value
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (data) {
-      return data;
-    });
+  if (fullNameField.value && emailField.value && passwordField.value && confirmPasswordField.value) {
+    if (comparePasswords()) {
+      console.log('match');
+      fetch('https://frontend-take-home.fetchrewards.com/form', {
+        method: 'POST',
+        body: JSON.stringify({
+          "name": fullNameField.value,
+          "email": emailField.value,
+          "password": passwordField.value,
+          "occupation": occupationList.value,
+          "state": statesList.value
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(function (response) {
+        if (response.ok) {
+          return response.json();
+        }
+      }).catch(function (error) {
+        document.getElementById('submissionErr').classList.remove('hidden');
+      });
+    }
+  } else {
+    document.getElementById('incompleteForm').classList.remove('hidden');
   }
 });
 },{}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -209,7 +226,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52651" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56176" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
