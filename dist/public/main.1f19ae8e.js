@@ -143,7 +143,7 @@ var populateOccupations = function populateOccupations() {
 
 var populateStates = function populateStates() {
   for (var i = 0; i < stateOptions.length; i++) {
-    statesList.options[i] = new Option("".concat(stateOptions[i].name));
+    statesList.options[i] = new Option("".concat(stateOptions[i + 1].name));
   }
 };
 
@@ -162,7 +162,7 @@ var showConfirmation = function showConfirmation() {
     promptText.classList.add('hidden');
     submissionSuccessful.classList.remove('hidden');
   }, 500);
-}; // Event Listeners & Fetches
+}; // Event Listeners/Fetches
 
 
 window.addEventListener('load', function () {

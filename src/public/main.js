@@ -28,7 +28,7 @@ const populateOccupations = () => {
 
 const populateStates = () => {
   for (let i = 0; i < stateOptions.length; i++) {
-    statesList.options[i] = new Option(`${stateOptions[i].name}`);
+    statesList.options[i] = new Option(`${stateOptions[i + 1].name}`);
   }
 };
 
@@ -50,7 +50,7 @@ const showConfirmation = () => {
   }, 500)
 }
 
-// Event Listeners & Fetches
+// Event Listeners/Fetches
 
 window.addEventListener('load', () => {
   fetch('https://frontend-take-home.fetchrewards.com/form')
