@@ -118,12 +118,11 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
-'use strict'; // Data variables
+'use strict'; // DATA VARIABLES
 
 var registrationData;
 var occupations;
-var stateOptions;
-var dyslexiaModeCounter = 0; // Form selectors
+var stateOptions; // FORM SELECTORS
 
 var dyslexiaModeBtn = document.getElementById('dyslexiaMode');
 var fullNameField = document.getElementById('userFullName');
@@ -135,76 +134,78 @@ var accountCreationForm = document.getElementById('creationForm');
 var promptText = document.getElementById('accountCreationText');
 var submissionSuccessful = document.getElementById('submissionSuccessful');
 var occupationList = document.getElementById('occupationList');
-var statesList = document.getElementById('statesList'); // Form population functions
+var statesList = document.getElementById('statesList'); // FORM POPULATION FUNCTIONS
 
 var populateOccupations = function populateOccupations() {
+  // Used to populate drop-down menu after fetching options from API
   for (var i = 0; i < occupations.length; i++) {
     occupationList.options[i] = new Option("".concat(occupations[i]));
   }
 };
 
 var populateStates = function populateStates() {
+  // Used to populate drop-down menu after fetching options from API
   for (var i = 0; i < stateOptions.length; i++) {
     statesList.options[i] = new Option("".concat(stateOptions[i + 1].name));
   }
 };
 
 var comparePasswords = function comparePasswords() {
+  // Compares both password fields to find a match, and displays an error if they do not
   if (passwordField.value === confirmPasswordField.value) {
     return true;
   } else {
     document.getElementById('passwordErr').classList.remove('hidden');
   }
-}; // Dyslexic mode
+}; // DYSLEXIC MODE
 
 
-var textElements = [promptText, accountCreationForm, submissionSuccessful];
+var textElements = [promptText, accountCreationForm, submissionSuccessful]; // Used to apply styling using forEach()
 
 var activateDyslexiaMode = function activateDyslexiaMode() {
-  dyslexiaModeCounter += 1;
-
-  if (dyslexiaModeCounter % 2 === 0) {
-    textElements.forEach(function (el) {
-      return el.classList.remove('dyslexic');
-    });
-  } else {
-    textElements.forEach(function (el) {
-      return el.classList.add('dyslexic');
-    });
-  }
-}; // Submission confirmation
+  textElements.forEach(function (el) {
+    return el.classList.toggle('dyslexic');
+  });
+}; // FORM SUBMISSION CONFIRMATION
 
 
 var showConfirmation = function showConfirmation() {
   setTimeout(function () {
+    // Timeout is applied so that elements are not shown/hidden
+    // until the fade animation is complete
     accountCreationForm.classList.add('hidden');
     promptText.classList.add('hidden');
     submissionSuccessful.classList.remove('hidden');
   }, 500);
-}; // Event Listeners/Fetches
+}; // EVENT LISTENERS/FETCHES
 
 
 dyslexiaModeBtn.addEventListener('click', activateDyslexiaMode);
 window.addEventListener('load', function () {
+  // Fetches drop-down options on page load
   fetch('https://frontend-take-home.fetchrewards.com/form').then(function (response) {
     return response.json();
   }).then(function (data) {
     return registrationData = data;
   }).then(function (data) {
     return occupations = registrationData.occupations;
-  }).then(function (data) {
+  }) // Assigns occupation data to the 'occupation' variable
+  .then(function (data) {
     return stateOptions = registrationData.states;
-  }).then(function () {
+  }) // Assigns state data to the 'stateOptions' variable
+  .then(function () {
     return populateOccupations();
   }).then(function () {
     return populateStates();
-  });
+  }); // Used to dynamically populate drop-down menus
 });
 formSubmit.addEventListener('click', function () {
-  var accountCreated;
+  var accountCreated; // This variable is true only if the POST request is successful; used as a safeguard
 
   if (fullNameField.value && emailField.value && passwordField.value && confirmPasswordField.value) {
+    // Avoids submission of an incomplete form
     if (comparePasswords()) {
+      // POST request is only sent if both password fields match
       fetch('https://frontend-take-home.fetchrewards.com/form', {
         method: 'POST',
         body: JSON.stringify({
@@ -219,19 +220,24 @@ formSubmit.addEventListener('click', function () {
         }
       }).then(function (response) {
         if (response.ok) {
+          // If the application receives a valid response, the fading animation is triggered
           accountCreationForm.classList.add('vanish');
           promptText.classList.add('vanish');
           accountCreated = true;
-          showConfirmation();
+          showConfirmation(); // Displays a message to confirm the account has been made
+
           return response.json();
         }
       }).catch(function (error) {
         if (!accountCreated) {
+          // The catch was displaying an error message regardless of outcome,
+          // so the 'accountCreated' variable was added to avoid user confusion
           document.getElementById('submissionErr').classList.remove('hidden');
         }
       });
     }
   } else {
+    // Displays incomplete form message if any field is left blank
     document.getElementById('incompleteForm').classList.remove('hidden');
   }
 });
