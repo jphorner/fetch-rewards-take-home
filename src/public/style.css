@@ -249,12 +249,12 @@ progress {
   background-color: white;
   border: 0px;
   border-radius: .3rem;
+  box-shadow: 2px 2px 2px black;
   transition-duration: .2s;
   cursor: pointer;
 }
 
 .dyslexia-mode:hover {
-  box-shadow: 2px 2px 2px black;
   padding: .4rem .5rem .2rem .5rem;
 }
 
