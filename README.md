@@ -4,7 +4,7 @@ In this take-home test, I was tasked with creating a signup page that accepts fi
 Upon submission of a complete form, a POST request is made to a Fetch Rewards API to submit the credentials for a new user. When this action is completed and the request has been verified, the user is presented with a message confirming their succcessful account creation.
 
 ## Setup
-Clone this repo and run the following commands:
+Clone this repo, navigate to the root of the project directory, and run the following commands:
 ```
 npm install
 npm start
@@ -28,11 +28,6 @@ Open a new browser tab and go to localhost:8888 to view this project.
 ## Application Status
 
 At this time, the core functionality of this application is complete. To ensure timely submission, a number of planned features have been omitted. These include:
-- **HTML accessibility tags (such as Aria labels)**
-  - This would be implemented to ensure screen reader accessibility
-- **Dyslexic mode**
-  - This would be accomplished by creating a button to swap the application's font family to Open Dyslexic
-  - The font of this button would also be written in Open Dyslexic to ensure visual accessibility
 - **Dark mode**
   - If time allowed, a CSS pre-processor (i.e., Sass) would be implemented to easily apply CSS styles upon clicking a Dark Mode button
   - This button would replace the background with a black-to-gray gradient, and would change the hover state of the 'Create Account' button to be a darker shade of orange
