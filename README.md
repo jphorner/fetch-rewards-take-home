@@ -1,7 +1,7 @@
 # Fetch Rewards Take-Home Test
-In this take-home test, I was tasked with creating a signup page that accepts fields for name, email, password, occupation, and state within the U.S.
+In this take-home test, I was tasked with creating a signup page that accepts fields for name, email, password, occupation, and state of residence within the U.S.
 
-Upon submission, a POST request is made to a Fetch Rewards API to submit the credentials for a new user. When this action is completed and the request has been verified, the user is presented with a message confirming their succcessful account creation.
+Upon submission of a complete form, a POST request is made to a Fetch Rewards API to submit the credentials for a new user. When this action is completed and the request has been verified, the user is presented with a message confirming their succcessful account creation.
 
 ## Setup
 Clone this repo and run the following commands:
@@ -32,15 +32,15 @@ At this time, the core functionality of this application is complete. To ensure 
   - This would be implemented to ensure screen reader accessibility
 - **Dyslexic mode**
   - This would be accomplished by creating a button to swap the application's font family to Open Dyslexic
-  - The font of this button would be written in Open Dyslexic to ensure visual accessibility
+  - The font of this button would also be written in Open Dyslexic to ensure visual accessibility
 - **Dark mode**
   - If time allowed, a CSS pre-processor (i.e., Sass) would be implemented to easily apply CSS styles upon clicking a Dark Mode button
-  - This button would replace the background with a black-to-gray gradient, and would change the hover state of the 'Create Account' button to be a darker orange
+  - This button would replace the background with a black-to-gray gradient, and would change the hover state of the 'Create Account' button to be a darker shade of orange
 - **Password and email requirements**
   - _Password:_ Conditions would be applied to the 'Create Account' button's event listener to ensure that the password contains one capital letter, one lowercase letter, one symbol, one number, and that the password is longer than eight characters
   - _Email:_ Conditions would be applied to the same button's event listener to ensure that the email contains the chracters '@' and '.', and that they appear in that order
 - **Mobile views**
-  - Utilizing media queries, this application would be resized to fit to mobile screens. It was unclear whether this would be necessary for this test, and so it was omitted for time.
+  - Utilizing media queries, this application would be resized to fit to mobile screens. It was unclear whether this would be necessary for this test, and so it was omitted for the sake of timely completion.
 
 ## Technologies
 - JavaScript
