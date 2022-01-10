@@ -63,9 +63,9 @@ window.addEventListener('load', () => {
 });
 
 formSubmit.addEventListener('click', () => {
+  let accountCreated;
   if (fullNameField.value && emailField.value && passwordField.value && confirmPasswordField.value) {
     if (comparePasswords()) {
-      console.log('match');
       fetch('https://frontend-take-home.fetchrewards.com/form', {
         method: 'POST',
         body: JSON.stringify(
@@ -83,15 +83,15 @@ formSubmit.addEventListener('click', () => {
       })
       .then(response => {
         if (response.ok) {
-          console.log('success')
           accountCreationForm.classList.add('vanish');
           promptText.classList.add('vanish');
+          accountCreated = true;
           showConfirmation();
           return response.json();
         }
       })
-      .catch(response => {
-        if (!response.ok) {
+      .catch(error => {
+        if (!accountCreated) {
           document.getElementById('submissionErr').classList.remove('hidden');
         }
       })

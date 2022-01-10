@@ -181,9 +181,10 @@ window.addEventListener('load', function () {
   });
 });
 formSubmit.addEventListener('click', function () {
+  var accountCreated;
+
   if (fullNameField.value && emailField.value && passwordField.value && confirmPasswordField.value) {
     if (comparePasswords()) {
-      console.log('match');
       fetch('https://frontend-take-home.fetchrewards.com/form', {
         method: 'POST',
         body: JSON.stringify({
@@ -198,14 +199,14 @@ formSubmit.addEventListener('click', function () {
         }
       }).then(function (response) {
         if (response.ok) {
-          console.log('success');
           accountCreationForm.classList.add('vanish');
           promptText.classList.add('vanish');
+          accountCreated = true;
           showConfirmation();
           return response.json();
         }
-      }).catch(function (response) {
-        if (!response.ok) {
+      }).catch(function (error) {
+        if (!accountCreated) {
           document.getElementById('submissionErr').classList.remove('hidden');
         }
       });
@@ -242,7 +243,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49839" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50747" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
