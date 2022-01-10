@@ -122,8 +122,10 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
 var registrationData;
 var occupations;
-var stateOptions; // Form selectors
+var stateOptions;
+var dyslexiaModeCounter = 0; // Form selectors
 
+var dyslexiaModeBtn = document.getElementById('dyslexiaMode');
 var fullNameField = document.getElementById('userFullName');
 var emailField = document.getElementById('userEmail');
 var passwordField = document.getElementById('userPassword');
@@ -153,6 +155,23 @@ var comparePasswords = function comparePasswords() {
   } else {
     document.getElementById('passwordErr').classList.remove('hidden');
   }
+}; // Dyslexic mode
+
+
+var textElements = [promptText, accountCreationForm, submissionSuccessful];
+
+var activateDyslexiaMode = function activateDyslexiaMode() {
+  dyslexiaModeCounter += 1;
+
+  if (dyslexiaModeCounter % 2 === 0) {
+    textElements.forEach(function (el) {
+      return el.classList.remove('dyslexic');
+    });
+  } else {
+    textElements.forEach(function (el) {
+      return el.classList.add('dyslexic');
+    });
+  }
 }; // Submission confirmation
 
 
@@ -165,6 +184,7 @@ var showConfirmation = function showConfirmation() {
 }; // Event Listeners/Fetches
 
 
+dyslexiaModeBtn.addEventListener('click', activateDyslexiaMode);
 window.addEventListener('load', function () {
   fetch('https://frontend-take-home.fetchrewards.com/form').then(function (response) {
     return response.json();
@@ -243,7 +263,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50407" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53513" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

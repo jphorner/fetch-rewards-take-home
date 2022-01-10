@@ -15,7 +15,7 @@ html {
   min-height: 100%;
 }
 
-html, * {
+html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Helvetica, sans-serif;
 }
 
@@ -232,4 +232,37 @@ progress {
 
 .vanish {
   opacity: 0%;
+}
+
+.dyslexic {
+  font-family: 'Courier Prime', monospace;
+}
+
+.dyslexia-mode {
+  position: absolute;
+  right: 7%;
+  top: 3%;
+  z-index: 3;
+  font-size: 1.2rem;
+  font-family: 'Courier Prime', monospace;
+  padding-top: .3rem;
+  background-color: white;
+  border: 0px;
+  border-radius: .3rem;
+  transition-duration: .2s;
+  cursor: pointer;
+}
+
+.dyslexia-mode:hover {
+  box-shadow: 2px 2px 2px black;
+  padding: .4rem .5rem .2rem .5rem;
+}
+
+.dyslexia-mode:active {
+  color: white;
+  background-color: gray;
+}
+
+.dyslexia-background {
+  background-color: white;
 }

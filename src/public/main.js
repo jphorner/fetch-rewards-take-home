@@ -5,8 +5,10 @@
 let registrationData;
 let occupations;
 let stateOptions;
+let dyslexiaModeCounter = 0;
 
 // Form selectors
+const dyslexiaModeBtn = document.getElementById('dyslexiaMode');
 const fullNameField = document.getElementById('userFullName');
 const emailField = document.getElementById('userEmail');
 const passwordField = document.getElementById('userPassword');
@@ -40,6 +42,19 @@ const comparePasswords = () => {
   }
 }
 
+// Dyslexic mode
+
+const textElements = [promptText, accountCreationForm, submissionSuccessful];
+
+const activateDyslexiaMode = () => {
+  dyslexiaModeCounter += 1;
+  if (dyslexiaModeCounter % 2 === 0) {
+    textElements.forEach( el => el.classList.remove('dyslexic'));
+  } else {
+    textElements.forEach( el => el.classList.add('dyslexic'));
+  }
+}
+
 // Submission confirmation
 
 const showConfirmation = () => {
@@ -51,6 +66,8 @@ const showConfirmation = () => {
 }
 
 // Event Listeners/Fetches
+
+dyslexiaModeBtn.addEventListener('click', activateDyslexiaMode);
 
 window.addEventListener('load', () => {
   fetch('https://frontend-take-home.fetchrewards.com/form')
